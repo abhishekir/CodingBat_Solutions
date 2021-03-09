@@ -1,5 +1,5 @@
 /**
- * codingbat.com/java/String-3
+ * https://codingbat.com/java/String-3
  * Harder String problems
  */
 public class String_3 {
@@ -8,7 +8,7 @@ public class String_3 {
      * count, but not the 'y' in "yellow" (not case sensitive). We'll say that a y or z is at the end of a word if there
      * is not an alphabetic letter immediately following it. (Note: Character.isLetter(char) tests if a char is an
      * alphabetic letter.)
-    **/
+     */
     public int countYZ(String str) {
         str = str.toLowerCase();
 
@@ -162,4 +162,10 @@ public class String_3 {
         }
         return str.substring(0, i);
     }
+
+    /** mirrorEnds
+     * Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string. In
+     * other words, zero or more characters at the very begining of the given string, and at the very end of the string
+     * in reverse order (possibly overlapping). For example, the string "abXYZba" has the mirror end "ab".
+     */
 }
