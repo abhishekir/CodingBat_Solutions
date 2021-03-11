@@ -168,4 +168,89 @@ public class String_3 {
      * other words, zero or more characters at the very begining of the given string, and at the very end of the string
      * in reverse order (possibly overlapping). For example, the string "abXYZba" has the mirror end "ab".
      */
+    public String mirrorEnds(String str) {
+        int len = str.length();
+        String rev;
+
+        if (len <= 1) return str;
+        else {
+            rev = str.substring(len-1);
+        }
+
+        int i = 0;
+        while (i < len && str.substring(0, i+1).equals(rev)) {
+            i++;
+            if (i < len)
+                rev += str.substring(len-i-1, len-i);
+        }
+
+        return str.substring(0, i);
+    }
+
+    /** maxBlock
+     * Given a string, return the length of the largest "block" in the string. A block is a run of adjacent chars that
+     * are the same.
+     */
+    public int maxBlock(String str) {
+        int count = 0;
+        int biggest_count = 0;
+        int len = str.length();
+        String previous;
+        String current;
+
+        if (len == 0) return count;
+        else if (len == 1) return 1;
+        else previous = str.substring(0, 1);
+
+        for (int i = 1; i < len; i++) {
+            current = str.substring(i, i+1);
+            if (current.equals(previous)) {
+                count++;
+                if (biggest_count < count) biggest_count = count;
+            }
+            else
+                count = 0;
+            previous = current;
+        }
+
+        return biggest_count + 1;
+    }
+
+    /** sumNumbers
+     * Given a string, return the sum of the numbers appearing in the string, ignoring all other characters. A number is
+     * a series of 1 or more digit chars in a row.
+     */
+    public int sumNumbers(String str) {
+        int sum = 0;
+        int len = str.length();
+        String num_str = "";
+        int num;
+
+        for (int i = 0; i < len; i++) {
+            char c = str.charAt(i);
+            boolean b = Character.isDigit(c);
+            if (b) {
+                num_str += c;
+            }
+            else if (!num_str.isEmpty()) {
+                num = Integer.parseInt(num_str);
+                num_str = "";
+                sum += num;
+            }
+        }
+
+        if (!num_str.isEmpty()) {
+            num = Integer.parseInt(num_str);
+            sum += num;
+        }
+
+        return sum;
+    }
+
+    /** notReplace
+     * Given a string, return a string where every appearance of the lowercase word "is" has been replaced with "is
+     * not". The word "is" should not be immediately preceeded or followed by a letter -- so for example the "is" in
+     * "this" does not count.
+     */
+
 }
