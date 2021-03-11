@@ -1,6 +1,8 @@
 /**
  * https://codingbat.com/java/String-3
  * Harder String problems
+ *
+ * Expected to be solved with 2 loops, but I solved all with 1 loop.
  */
 public class String_3 {
     /** countYZ
@@ -252,5 +254,28 @@ public class String_3 {
      * not". The word "is" should not be immediately preceeded or followed by a letter -- so for example the "is" in
      * "this" does not count.
      */
+    public String notReplace(String str) {
+        String result = "";
+        int len = str.length();
 
+        if (len < 2) return result;
+        boolean last_char = false;
+
+        for (int i = 0; i < len-1; i++) {
+            if (i+2 == len) last_char = true;
+            if (str.substring(i, i+2).equals("is")
+                    && (i == 0 || !Character.isLetter(str.charAt(i-1)))
+                    && (last_char || i+2 < len && !Character.isLetter(str.charAt(i+2)))) {
+                result += "is not";
+                i++;
+                last_char = false;
+            } else {
+                result += str.substring(i, i+1);
+            }
+        }
+
+        if (last_char) result += str.substring(len-1);
+
+        return result;
+    }
 }
