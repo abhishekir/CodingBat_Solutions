@@ -273,19 +273,3 @@ public class Array_1 {
         else return new int[] {a[0], b[0]};
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
