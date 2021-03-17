@@ -71,5 +71,7 @@ class Logic_2:
         Return the number of small bars to use, assuming we always use big bars before small bars. Return -1 if it can't 
         be done.
     """
-
-
+    def make_chocolate(small, big, goal):
+        bigs_needed = goal / 5
+        goal -= big*5 if bigs_needed >= big else bigs_needed*5
+        return goal if goal <= small else -1
