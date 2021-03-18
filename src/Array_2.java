@@ -498,20 +498,124 @@ public class Array_2 {
      * grouped at the start of the array. The order of the non-zero numbers does not matter. So {1, 0, 0, 1} becomes {0,
      * 0, 1, 1}. You may modify and return the given array or make a new array.
      */
+    public int[] zeroFront(int[] nums) {
+        int firstNon0 = 0;
+        boolean foundNon0 = false;
 
+        for (int i = 0; i < nums.length; i++) {
+            if (foundNon0) {
+                if (nums[i] == 0) {
+                    int temp = nums[i];
+                    nums[i] = nums[firstNon0];
+                    nums[firstNon0] = temp;
+                    firstNon0++;
+                } else continue;
+            }
+            else if (nums[i] != 0) {
+                firstNon0 = i;
+                foundNon0 = true;
+            }
+        }
+
+        return nums;
+    }
+
+    /** withoutTen
+     * Return a version of the given array where all the 10's have been removed. The remaining elements should shift
+     * left towards the start of the array as needed, and the empty spaces a the end of the array should be 0. So {1,
+     * 10, 10, 2} yields {1, 2, 0, 0}. You may modify and return the given array or make a new array.
+     */
+    public int[] withoutTen(int[] nums) {
+        int first10idx = 0;
+        boolean found10 = false;
+        for (int i = 0; i < nums.length; i++) {
+            if (found10) {
+                if (nums[i] == 10) {
+                    nums[i] = 0;
+                    continue;
+                } else {
+                    nums[first10idx] = nums[i];
+                    nums[i] = 0;
+                    first10idx++;
+                }
+            } else if (nums[i] == 10) {
+                nums[i] = 0;
+                found10 = true;
+                first10idx = i;
+            }
+        }
+
+        return nums;
+    }
+
+    /** zeroMax
+     * Return a version of the given array where each zero value in the array is replaced by the largest odd value to
+     * the right of the zero in the array. If there is no odd value to the right of the zero, leave the zero as a zero.
+     */
+    public int[] zeroMax(int[] nums) {
+        int largest_odd = 0;
+        int len = nums.length;
+
+        for (int i = len-1; i >= 0; i--) {
+            int curr = nums[i];
+            if (curr % 2 == 1 && curr > largest_odd) largest_odd = curr;
+            else if (nums[i] == 0) nums[i] = largest_odd;
+        }
+
+        return nums;
+    }
+
+    /** evenOdd
+     * Return an array that contains the exact same numbers as the given array, but rearranged so that all the even
+     * numbers come before all the odd numbers. Other than that, the numbers can be in any order. You may modify and
+     * return the given array, or make a new array.
+     */
+    public int[] evenOdd(int[] nums) {
+        int firstOddIdx = 0;
+        boolean foundOdd = false;
+
+        for (int i = 0; i < nums.length; i++) {
+            boolean odd = nums[i] % 2 == 1;
+            if (foundOdd) {
+                if (!odd) {
+                    int temp = nums[i];
+                    nums[i] = nums[firstOddIdx];
+                    nums[firstOddIdx] = temp;
+                    firstOddIdx++;
+                } else continue;
+            } else if (odd) {
+                foundOdd = true;
+                firstOddIdx = i;
+            }
+        }
+
+        return nums;
+    }
+
+    /** fizzBuzz
+     * This is slightly more difficult version of the famous FizzBuzz problem which is sometimes given as a first
+     * problem for job interviews. (See also: FizzBuzz Code.) Consider the series of numbers beginning at start and
+     * running up to but not including end, so for example start=1 and end=5 gives the series 1, 2, 3, 4. Return a new
+     * String[] array containing the string form of these numbers, except for multiples of 3, use "Fizz" instead of the
+     * number, for multiples of 5 use "Buzz", and for multiples of both 3 and 5 use "FizzBuzz". In Java,
+     * String.valueOf(xxx) will make the String form of an int or other type. This version is a little more complicated
+     * than the usual version since you have to allocate and index into an array instead of just printing, and we vary
+     * the start/end instead of just always doing 1..100.
+     */
+    public String[] fizzBuzz(int start, int end) {
+        String[] result = new String[end-start];
+        int val = start;
+
+        for (int i = 0; i < result.length; i++) {
+            boolean mod3 = val % 3 == 0;
+            boolean mod5 = val % 5 == 0;
+            if (mod3 && mod5) result[i] = "FizzBuzz";
+            else if (mod3) result[i] = "Fizz";
+            else if (mod5) result[i] = "Buzz";
+            else result[i] = String.valueOf(val);
+            val++;
+        }
+
+        return result;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
