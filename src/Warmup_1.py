@@ -243,3 +243,98 @@ assert front3('abcXYZ') == 'abcabcabc'
 assert front3('ab') == 'ababab'
 assert front3('a') == 'aaa'
 assert front3('') == ''
+
+
+""" backAround
+    Given a string, take the last char and return a new string with the last char added at the front and back, so "cat" 
+    yields "tcatt". The original string will be length 1 or more.
+"""
+def backAround(str):
+    return str[-1:] + str + str[-1:]
+
+assert backAround("cat") == "tcatt"
+assert backAround("Hello") == "oHelloo"
+assert backAround("a") == "aaa"
+assert backAround("abc") == "cabcc"
+assert backAround("read") == "dreadd"
+assert backAround("boo") == "obooo"
+
+
+""" or35
+    Return true if the given non-negative number is a multiple of 3 or a multiple of 5.
+"""
+def or35(n):
+    return n % 5 == 0 or n % 3 == 0
+
+assert or35(3) == True
+assert or35(10) == True
+assert or35(8) == False
+assert or35(15) == True
+assert or35(5) == True
+assert or35(9) == True
+assert or35(4) == False
+assert or35(7) == False
+assert or35(6) == True
+assert or35(17) == False
+assert or35(18) == True
+assert or35(29) == False
+assert or35(20) == True
+assert or35(21) == True
+assert or35(22) == False
+assert or35(45) == True
+assert or35(99) == True
+assert or35(100) == True
+assert or35(101) == False
+assert or35(121) == False
+assert or35(122) == False
+assert or35(123) == True
+
+
+""" front22
+    Given a string, take the first 2 chars and return the string with the 2 chars added at both the front and back, so 
+    "kitten" yields"kikittenki". If the string length is less than 2, use whatever chars are there.
+"""
+def front22(str):
+    return str[:2] + str + str[:2]
+
+assert front22("kitten") == "kikittenki"
+assert front22("Ha") == "HaHaHa"
+assert front22("abc") == "ababcab"
+assert front22("ab") == "ababab"
+assert front22("a") == "aaa"
+assert front22("") == ""
+assert front22("Logic") == "LoLogicLo"
+
+
+""" startHi
+    Given a string, return true if the string starts with "hi" and false otherwise.
+"""
+def startHi(str):
+    return str[:2] == "hi"
+
+assert startHi("hi there") == True
+assert startHi("hi") == True
+assert startHi("hello hi") == False
+assert startHi("he") == False
+assert startHi("h") == False
+assert startHi("") == False
+assert startHi("ho hi") == False
+assert startHi("hi ho") == True
+
+
+""" icyHot
+    Given two temperatures, return true if one is less than 0 and the other is greater than 100.
+"""
+def icyHot(temp1, temp2):
+    return temp1 < 0 < 100 < temp2 or temp2 < 0 < 100 < temp1
+
+assert icyHot(120, -1) == True
+assert icyHot(-1, 120) == True
+assert icyHot(2, 120) == False
+assert icyHot(-1, 100) == False
+assert icyHot(-2, -2) == False
+assert icyHot(120, 120) == False
+
+
+"""
+"""
