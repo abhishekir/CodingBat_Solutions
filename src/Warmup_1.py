@@ -336,5 +336,96 @@ assert icyHot(-2, -2) == False
 assert icyHot(120, 120) == False
 
 
+""" in1020
+    Given 2 int values, return true if either of them is in the range 10..20 inclusive.
 """
+def in1020(a, b):
+    return a in range(10, 21) or b in range(10, 21)
+
+assert in1020(12, 99) == True
+assert in1020(21, 12) == True
+assert in1020(8, 99) == False
+assert in1020(99, 10) == True
+assert in1020(20, 20) == True
+assert in1020(21, 21) == False
+assert in1020(9, 9) == False
+
+
+""" hasTeen
+    We'll say that a number is "teen" if it is in the range 13..19 inclusive. Given 3 int values, return true if 1 or
+    more of them are teen.
 """
+def hasTeen(a, b, c):
+    return isTeen(a) or isTeen(b) or isTeen(c)
+
+def isTeen(n):
+    return n in range(13, 20)
+
+assert hasTeen(13, 20, 10) == True
+assert hasTeen(20, 19, 10) == True
+assert hasTeen(20, 10, 13) == True
+assert hasTeen(1, 20, 12) == False
+assert hasTeen(19, 20, 12) == True
+assert hasTeen(12, 20, 19) == True
+assert hasTeen(12, 9, 20) == False
+assert hasTeen(12, 18, 20) == True
+assert hasTeen(14, 2, 20) == True
+assert hasTeen(4, 2, 20) == False
+assert hasTeen(11, 22, 22) == False
+
+
+""" loneTeen
+    We'll say that a number is "teen" if it is in the range 13..19 inclusive. Given 2 int values, return true if one
+    or the other is teen, but not both.
+"""
+def loneTeen(a, b):
+    return isTeen(a) ^ isTeen(b)
+
+assert loneTeen(13, 99) == True
+assert loneTeen(21, 19) == True
+assert loneTeen(13, 13) == False
+assert loneTeen(14, 20) == True
+assert loneTeen(20, 15) == True
+assert loneTeen(16, 17) == False
+assert loneTeen(16, 9) == True
+assert loneTeen(16, 18) == False
+assert loneTeen(13, 19) == False
+assert loneTeen(13, 20) == True
+assert loneTeen(6, 18) == True
+assert loneTeen(99, 13) == True
+assert loneTeen(99, 99) == False
+
+
+""" delDel
+    Given a string, if the string "del" appears starting at index 1, return a string where that "del" has been
+    deleted. Otherwise, return the string unchanged.
+"""
+def delDel(str):
+    return str[0] + str[4:] if str[1:4] == "del" else str
+
+assert delDel("adelbc") == "abc"
+assert delDel("adelHello") == "aHello"
+assert delDel("adedbc") == "adedbc"
+assert delDel("abcdel") == "abcdel"
+assert delDel("add") == "add"
+assert delDel("ad") == "ad"
+assert delDel("a") == "a"
+assert delDel("") == ""
+assert delDel("del") == "del"
+assert delDel("adel") == "a"
+assert delDel("aadelbb") == "aadelbb"
+
+
+""" mixStart
+    Return true if the given string begins with "mix", except the 'm' can be anything, so "pix", "9ix" .. all count.
+"""
+def mixStart(str):
+    return False if len(str) < 3 else str[1:3] == "ix"
+
+assert mixStart("mix snacks") == True
+assert mixStart("pix snacks") == True
+assert mixStart("piz snacks") == False
+assert mixStart("nix") == True
+assert mixStart("ni") == False
+assert mixStart("n") == False
+assert mixStart("") == False
