@@ -429,3 +429,126 @@ assert mixStart("nix") == True
 assert mixStart("ni") == False
 assert mixStart("n") == False
 assert mixStart("") == False
+
+
+""" startOz
+    Given a string, return a string made of the first 2 chars (if present), however include first char only if it is
+    'o' and include the second only if it is 'z', so "ozymandias" yields "oz".
+"""
+def startOz(str):
+    res = ""
+    if len(str) > 0 and str[0] == "o":
+        res += "o"
+    if len(str) > 1 and str[1] == "z":
+        res += "z"
+    return res
+
+assert startOz("ozymandias") == "oz"
+assert startOz("bzoo") == "z"
+assert startOz("oxx") == "o"
+assert startOz("oz") == "oz"
+assert startOz("ounce") == "o"
+assert startOz("o") == "o"
+assert startOz("abc") == ""
+assert startOz("") == ""
+assert startOz("zoo") == ""
+assert startOz("aztec") == "z"
+assert startOz("zzzz") == "z"
+assert startOz("oznic") == "oz"
+
+
+""" intMax
+    Given three int values, a b c, return the largest.
+"""
+def intMax(a, b, c):
+    return max(a, b, c)
+
+assert intMax(1, 2, 3) == 3
+assert intMax(1, 3, 2) == 3
+assert intMax(3, 2, 1) == 3
+assert intMax(9, 3, 3) == 9
+assert intMax(3, 9, 3) == 9
+assert intMax(3, 3, 9) == 9
+assert intMax(8, 2, 3) == 8
+assert intMax(-3, -1, -2) == -1
+assert intMax(6, 2, 5) == 6
+assert intMax(5, 6, 2) == 6
+assert intMax(5, 2, 6) == 6
+
+
+""" close10
+    Given 2 int values, return whichever value is nearest to the value 10, or return 0 in the event of a tie.
+"""
+def close10(a, b):
+    return 0 if abs(a-10) == abs(b-10) else a if abs(a-10) < abs(b-10) else b
+
+assert close10(8, 13) == 8
+assert close10(13, 8) == 8
+assert close10(13, 7) == 0
+assert close10(7, 13) == 0
+assert close10(9, 13) == 9
+assert close10(13, 8) == 8
+assert close10(10, 12) == 10
+assert close10(11, 10) == 10
+assert close10(5, 21) == 5
+assert close10(0, 20) == 0
+assert close10(10, 10) == 0
+
+
+""" in3050
+    Given 2 int values, return true if they are both in the range 30..40 inclusive, or they are both in the range
+    40..50 inclusive.
+"""
+def in3050(a, b):
+    return a in range(30, 41) and b in range(30, 41) or a in range(40, 51) and b in range(40, 51)
+
+assert in3050(30, 31) == True
+assert in3050(30, 41) == False
+assert in3050(40, 50) == True
+assert in3050(40, 51) == False
+assert in3050(39, 50) == False
+assert in3050(50, 39) == False
+assert in3050(40, 39) == True
+assert in3050(49, 48) == True
+assert in3050(50, 40) == True
+assert in3050(50, 51) == False
+assert in3050(35, 36) == True
+assert in3050(35, 45) == False
+
+
+""" max1020
+    Given 2 positive int values, return the larger value that is in the range 10..20 inclusive, or return 0 if
+    neither is in that range.
+"""
+def max1020(a, b):
+    return 0 if not (inRange(a) or inRange(b)) \
+        else b if not inRange(a) \
+        else a if not inRange(b) \
+        else a if a >= b \
+        else b
+
+def inRange(n):
+    return n in range(10, 21)
+
+assert max1020(11, 19) == 19
+assert max1020(19, 11) == 19
+assert max1020(11, 9) == 11
+assert max1020(9, 21) == 0
+assert max1020(10, 21) == 10
+assert max1020(21, 10) == 10
+assert max1020(9, 11) == 11
+assert max1020(23, 10) == 10
+assert max1020(20, 10) == 20
+assert max1020(7, 20) == 20
+assert max1020(17, 16) == 17
+
+
+
+
+
+
+
+
+
+
+
