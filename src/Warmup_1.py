@@ -543,12 +543,62 @@ assert max1020(7, 20) == 20
 assert max1020(17, 16) == 17
 
 
+""" stringE
+    Return true if the given string contains between 1 and 3 'e' chars.
+"""
+def stringE(str):
+    return str.count("e") in range(1, 4)
+
+assert stringE("Hello") == True
+assert stringE("Heelle") == True
+assert stringE("Heelele") == False
+assert stringE("Hll") == False
+assert stringE("e") == True
+assert stringE("") == False
 
 
+""" lastDigit
+    Given two non-negative int values, return true if they have the same last digit, such as with 27 and 57.
+"""
+def lastDigit(a, b):
+    return a % 10 == b % 10
+
+assert lastDigit(7, 17) == True
+assert lastDigit(6, 17) == False
+assert lastDigit(3, 113) == True
+assert lastDigit(114, 113) == False
+assert lastDigit(114, 4) == True
+assert lastDigit(10, 0) == True
+assert lastDigit(11, 0) == False
 
 
+""" endUp
+    Given a string, return a new string where the last 3 chars are now in upper case. If the string has less than
+    3 chars, uppercase whatever is there.
+"""
+def endUp(str):
+    return str.upper() if len(str) < 4 else str[:-3] + str[-3:].upper()
+
+assert endUp("Hello") == "HeLLO"
+assert endUp("hi there") == "hi thERE"
+assert endUp("hi") == "HI"
+assert endUp("woo hoo") == "woo HOO"
+assert endUp("xyz12") == "xyZ12"
+assert endUp("x") == "X"
+assert endUp("") == ""
 
 
+""" everyNth
+    Given a non-empty string and an int N, return the string made starting with char 0, and then every Nth char of
+    the string. So if N is 3, use char 0, 3, 6, ... and so on. N is 1 or more.
+"""
+def everyNth(str, n):
+    return str[0] + everyNth(str[n:], n) if str else ""
 
-
-
+assert everyNth("Miracle", 2) == "Mrce"
+assert everyNth("abcdefg", 2) == "aceg"
+assert everyNth("abcdefg", 3) == "adg"
+assert everyNth("Chocolate", 3) == "Cca"
+assert everyNth("Chocolates", 3) == "Ccas"
+assert everyNth("Chocolates", 4) == "Coe"
+assert everyNth("Chocolates", 100) == "C"
