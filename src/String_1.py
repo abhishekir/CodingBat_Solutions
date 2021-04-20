@@ -295,8 +295,340 @@ assert nTwice("Code", 4) == "CodeCode"
 assert nTwice("Code", 2) == "Code"
 
 
+""" twoChar
+    Given a string and an index, return a string length 2 starting at the given index. If the index is too big or too
+    small to define a string length 2, use the first 2 chars. The string length will be at least 2.
+"""
+def twoChar(str, index):
+    return str[:2] if index + 2 > len(str) or index < 0 else str[index:index+2]
+
+assert twoChar("java", 0) == "ja"
+assert twoChar("java", 2) == "va"
+assert twoChar("java", 3) == "ja"
+assert twoChar("java", 4) == "ja"
+assert twoChar("java", -1) == "ja"
+assert twoChar("Hello", 0) == "He"
+assert twoChar("Hello", 1) == "el"
+assert twoChar("Hello", 99) == "He"
+assert twoChar("Hello", 3) == "lo"
+assert twoChar("Hello", 4) == "He"
+assert twoChar("Hello", 5) == "He"
+assert twoChar("Hello", -7) == "He"
+assert twoChar("Hello", 6) == "He"
+assert twoChar("Hello", -1) == "He"
+assert twoChar("yay", 0) == "ya"
 
 
+""" middleThree
+    Given a string of odd length, return the string length 3 from its middle, so "Candy" yields "and". The string
+    length will be at least 3.
+"""
+def middleThree(str):
+    mid = int(len(str) / 2)
+    return str[mid-1:mid+2]
+
+assert middleThree("Candy") == "and"
+assert middleThree("and") == "and"
+assert middleThree("solving") == "lvi"
+assert middleThree("Hi yet Hi") == "yet"
+assert middleThree("java yet java") == "yet"
+assert middleThree("Chocolate") == "col"
+assert middleThree("XabcxyzabcX") == "xyz"
 
 
+""" hasBad
+    Given a string, return true if "bad" appears starting at index 0 or 1 in the string, such as with "badxxx" or
+    "xbadxx" but not "xxbadxx". The string may be any length, including 0. Note: use .equals() to compare 2 strings.
+"""
+def hasBad(str):
+    return len(str) > 2 and str[0:3] == "bad" or len(str) > 3 and str[1:4] == "bad"
 
+assert hasBad("badxx") == True
+assert hasBad("xbadxx") == True
+assert hasBad("xxbadxx") == False
+assert hasBad("code") == False
+assert hasBad("bad") == True
+assert hasBad("ba") == False
+assert hasBad("xba") == False
+assert hasBad("xbad") == True
+assert hasBad("") == False
+assert hasBad("badyy") == True
+
+
+""" atFirst
+    Given a string, return a string length 2 made of its first 2 chars. If the string length is less than 2, use '@'
+    for the missing chars.
+"""
+def atFirst(str):
+    return (str[0] if str else "@") + (str[1] if len(str) > 1 else "@")
+
+assert atFirst("hello") == "he"
+assert atFirst("hi") == "hi"
+assert atFirst("h") == "h@"
+assert atFirst("") == "@@"
+assert atFirst("kitten") == "ki"
+assert atFirst("java") == "ja"
+assert atFirst("j") == "j@"
+
+
+""" lastChars
+    Given 2 strings, a and b, return a new string made of the first char of a and the last char of b, so "yo" and
+    "java" yields "ya". If either string is length 0, use '@' for its missing char.
+"""
+def lastChars(a, b):
+    return (a[0] if a else "@") + (b[-1:] if b else "@")
+
+assert lastChars("last", "chars") == "ls"
+assert lastChars("yo", "java") == "ya"
+assert lastChars("hi", "") == "h@"
+assert lastChars("", "hello") == "@o"
+assert lastChars("", "") == "@@"
+assert lastChars("kitten", "hi") == "ki"
+assert lastChars("k", "zip") == "kp"
+assert lastChars("kitten", "") == "k@"
+assert lastChars("kitten", "zip") == "kp"
+
+
+""" conCat
+    Given two strings, append them together (known as "concatenation") and return the result. However, if the
+    concatenation creates a double-char, then omit one of the chars, so "abc" and "cat" yields "abcat".
+"""
+def conCat(a, b):
+    if a and not b:
+        return a
+    elif b and not a:
+        return b
+    else:
+        return (a if a[-1:] != b[0] else a[:-1]) + b
+
+assert conCat("abc", "cat") == "abcat"
+assert conCat("dog", "cat") == "dogcat"
+assert conCat("abc", "") == "abc"
+assert conCat("", "cat") == "cat"
+assert conCat("pig", "g") == "pig"
+assert conCat("pig", "doggy") == "pigdoggy"
+
+
+""" lastTwo
+    Given a string of any length, return a new string where the last 2 chars, if present, are swapped, so "coding"
+    yields "codign".
+"""
+def lastTwo(str):
+    if len(str) < 2:
+        return str
+    else:
+        return str[:-2] + str[-1:] + str[-2:-1]
+
+assert lastTwo("coding") == "codign"
+assert lastTwo("cat") == "cta"
+assert lastTwo("ab") == "ba"
+assert lastTwo("a") == "a"
+assert lastTwo("") == ""
+
+
+""" seeColor
+    Given a string, if the string begins with "red" or "blue" return that color string, otherwise return the empty
+    string.
+"""
+def seeColor(str):
+    return "red" if str[:3] == "red" else "blue" if str[:4] == "blue" else ""
+
+assert seeColor("redxx") == "red"
+assert seeColor("xxred") == ""
+assert seeColor("blueTimes") == "blue"
+assert seeColor("NoColor") == ""
+assert seeColor("red") == "red"
+assert seeColor("re") == ""
+assert seeColor("blu") == ""
+assert seeColor("blue") == "blue"
+assert seeColor("a") == ""
+assert seeColor("") == ""
+assert seeColor("xyzred") == ""
+
+
+""" frontAgain
+    Given a string, return true if the first 2 chars in the string also appear at the end of the string, such as with
+    "edited".
+"""
+def frontAgain(str):
+    if len(str) < 2:
+        return False
+    else:
+        return str[:2] == str[-2:]
+
+assert frontAgain("edited") == True
+assert frontAgain("edit") == False
+assert frontAgain("ed") == True
+assert frontAgain("jj") == True
+assert frontAgain("jjj") == True
+assert frontAgain("jjjj") == True
+assert frontAgain("jjjk") == False
+assert frontAgain("x") == False
+assert frontAgain("") == False
+assert frontAgain("java") == False
+assert frontAgain("javaja") == True
+
+
+""" minCat
+    Given two strings, append them together (known as "concatenation") and return the result. However, if the strings
+    are different lengths, omit chars from the longer string so it is the same length as the shorter string. So
+    "Hello" and "Hi" yield "loHi". The strings may be any length.
+"""
+def minCat(a, b):
+    if a and b:
+        shortest = len(a) if len(a) < len(b) else len(b)
+        return a[-shortest:] + b[-shortest:]
+    return ""
+
+assert minCat("Hello", "Hi") == "loHi"
+assert minCat("Hello", "java") == "ellojava"
+assert minCat("java", "Hello") == "javaello"
+assert minCat("abc", "x") == "cx"
+assert minCat("x", "abc") == "xc"
+assert minCat("abc", "") == ""
+
+
+""" extraFront
+    Given a string, return a new string made of 3 copies of the first 2 chars of the original string. The string may
+    be any length. If there are fewer than 2 chars, use whatever is there.
+"""
+def extraFront(str):
+    front = str[:2]
+    return 3 * front
+
+assert extraFront("Hello") == "HeHeHe"
+assert extraFront("ab") == "ababab"
+assert extraFront("H") == "HHH"
+assert extraFront("") == ""
+assert extraFront("Candy") == "CaCaCa"
+assert extraFront("Code") == "CoCoCo"
+
+
+""" without2
+    Given a string, if a length 2 substring appears at both its beginning and end, return a string without the
+    substring at the beginning, so "HelloHe" yields "lloHe". The substring may overlap with itself, so "Hi" yields
+    "". Otherwise, return the original string unchanged.
+"""
+def without2(str):
+    if len(str) < 2:
+        return str
+    else:
+        return str[2:] if str[:2] == str[-2:] else str
+
+assert without2("HelloHe") == "lloHe"
+assert without2("HelloHi") == "HelloHi"
+assert without2("Hi") == ""
+assert without2("Chocolate") == "Chocolate"
+assert without2("xxx") == "x"
+assert without2("xx") == ""
+assert without2("x") == "x"
+assert without2("") == ""
+assert without2("Fruits") == "Fruits"
+
+
+""" deFront
+    Given a string, return a version without the first 2 chars. Except keep the first char if it is 'a' and keep the
+    second char if it is 'b'. The string may be any length. Harder than it looks.
+"""
+def deFront(str):
+    return (str[0] if str and str[0] == "a" else "") \
+           + (str[1] if len(str) > 1 and str[1] == "b" else "") \
+           + (str[2:] if len(str) > 2 else "")
+
+assert deFront("Hello") == "llo"
+assert deFront("java") == "va"
+assert deFront("away") == "aay"
+assert deFront("axy") == "ay"
+assert deFront("abc") == "abc"
+assert deFront("xby") == "by"
+assert deFront("ab") == "ab"
+assert deFront("ax") == "a"
+assert deFront("axb") == "ab"
+assert deFront("aaa") == "aa"
+assert deFront("xbc") == "bc"
+assert deFront("bbb") == "bb"
+assert deFront("bazz") == "zz"
+assert deFront("ba") == ""
+assert deFront("abxyz") == "abxyz"
+assert deFront("hi") == ""
+assert deFront("his") == "s"
+assert deFront("xz") == ""
+assert deFront("zzz") == "z"
+
+
+""" startWord
+    Given a string and a second "word" string, we'll say that the word matches the string if it appears at the front
+    of the string, except its first char does not need to match exactly. On a match, return the front of the string,
+    or otherwise return the empty string. So, so with the string "hippo" the word "hi" returns "hi" and "xip" returns
+    "hip". The word will be at least length 1.
+"""
+def startWord(str, word):
+    if not str:
+        return str
+    match = str[1:len(word)] == word[1:]
+    return str[:len(word)] if match else ""
+
+assert startWord("hippo", "hi") == "hi"
+assert startWord("hippo", "xip") == "hip"
+assert startWord("hippo", "i") == "h"
+assert startWord("hippo", "ix") == ""
+assert startWord("h", "ix") == ""
+assert startWord("", "i") == ""
+assert startWord("hip", "zi") == "hi"
+assert startWord("hip", "zip") == "hip"
+assert startWord("hip", "zig") == ""
+assert startWord("h", "z") == "h"
+assert startWord("hippo", "xippo") == "hippo"
+assert startWord("hippo", "xyz") == ""
+assert startWord("hippo", "hip") == "hip"
+assert startWord("kitten", "cit") == "kit"
+assert startWord("kit", "cit") == "kit"
+
+
+""" withoutX
+    Given a string, if the first or last chars are 'x', return the string without those 'x' chars, and otherwise
+    return the string unchanged.
+"""
+def withoutX(str):
+    if not str:
+        return str
+    else:
+        return (str[0] if str[0] != "x" else "") + (str[1:-1]) + (str[-1] if str[-1] != "x" else "")
+
+assert withoutX("xHix") == "Hi"
+assert withoutX("xHi") == "Hi"
+assert withoutX("Hxix") == "Hxi"
+assert withoutX("Hi") == "Hi"
+assert withoutX("xxHi") == "xHi"
+assert withoutX("Hix") == "Hi"
+assert withoutX("xaxbx") == "axb"
+assert withoutX("xx") == ""
+assert withoutX("x") == ""
+assert withoutX("") == ""
+assert withoutX("Hello") == "Hello"
+assert withoutX("Hexllo") == "Hexllo"
+
+
+""" withoutX2
+    Given a string, if one or both of the first 2 chars is 'x', return the string without those 'x' chars, and
+    otherwise return the string unchanged. This is a little harder than it looks.
+"""
+def withoutX2(str):
+    if not str:
+        return str
+    else:
+        return (str[0] if str[0] != "x" else "") + (str[1] if len(str) > 1 and str[1] != "x" else "") + str[2:]
+
+assert withoutX2("xHi") == "Hi"
+assert withoutX2("Hxi") == "Hi"
+assert withoutX2("Hi") == "Hi"
+assert withoutX2("xxHi") == "Hi"
+assert withoutX2("Hix") == "Hix"
+assert withoutX2("xaxb") == "axb"
+assert withoutX2("axxb") == "axb"
+assert withoutX2("xx") == ""
+assert withoutX2("x") == ""
+assert withoutX2("") == ""
+assert withoutX2("Hello") == "Hello"
+assert withoutX2("Hexllo") == "Hexllo"
+assert withoutX2("xHxllo") == "Hxllo"
