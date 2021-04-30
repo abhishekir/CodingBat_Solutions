@@ -276,6 +276,570 @@ assert more14([4, 1, 4, 6, 1]) == False
 assert more14([1, 4, 1, 4, 1, 6]) == True
 
 
+""" fizzArray
+    Given a number n, create and return a new int array of length n, containing the numbers 0, 1, 2, ... n-1. The
+    given n may be 0, in which case just return a length 0 array. You do not need a separate if-statement for the
+    length-0 case; the for-loop should naturally execute 0 times in that case, so it just works. The syntax to make a
+    new int array is: new int[desired_length]
+"""
+def fizzArray(n):
+    res = []
+    for i in range(n):
+        res.append(i)
+    return res
+
+assert fizzArray(4) == [0, 1, 2, 3]
+assert fizzArray(1) == [0]
+assert fizzArray(10) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+assert fizzArray(0) == []
+assert fizzArray(2) == [0, 1]
+assert fizzArray(7) == [0, 1, 2, 3, 4, 5, 6]
+
+
+""" only14
+    Given an array of ints, return true if every element is a 1 or a 4.
+"""
+def only14(nums):
+    for i in range(len(nums)):
+        if not (nums[i] == 1 or nums[i] == 4):
+            return False
+    return True
+
+assert only14([1, 4, 1, 4]) == True
+assert only14([1, 4, 2, 4]) == False
+assert only14([1, 1]) == True
+assert only14([4, 1]) == True
+assert only14([2]) == False
+assert only14([]) == True
+assert only14([1, 4, 1, 3]) == False
+assert only14([3, 1, 3]) == False
+assert only14([1]) == True
+assert only14([4]) == True
+assert only14([3, 4]) == False
+assert only14([1, 3, 4]) == False
+assert only14([1, 1, 1]) == True
+assert only14([1, 1, 1, 5]) == False
+assert only14([4, 1, 4, 1]) == True
+
+
+""" fizzArray2
+    Given a number n, create and return a new string array of length n, containing the strings "0", "1" "2" ..
+    through n-1. N may be 0, in which case just return a length 0 array.
+"""
+def fizzArray2(n):
+    res = []
+    for i in range(n):
+        res.append(str(i))
+    return res
+
+assert fizzArray2(4) == ["0", "1", "2", "3"]
+assert fizzArray2(10) == ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+assert fizzArray2(2) == ["0", "1"]
+assert fizzArray2(1) == ["0"]
+assert fizzArray2(0) == []
+assert fizzArray2(7) == ["0", "1", "2", "3", "4", "5", "6"]
+assert fizzArray2(9) == ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+assert fizzArray2(11) == ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+
+
+""" no14
+    Given an array of ints, return true if it contains no 1's or it contains no 4's.
+"""
+def no14(nums):
+    seen1 = False
+    seen4 = False
+    for i in range(len(nums)):
+        if nums[i] == 1:
+            seen1 = True
+        elif nums[i] == 4:
+            seen4 = True
+    return not (seen1 or seen4) or (seen1 ^ seen4)
+
+assert no14([1, 2, 3]) == True
+assert no14([1, 2, 3, 4]) == False
+assert no14([2, 3, 4]) == True
+assert no14([1, 1, 4, 4]) == False
+assert no14([2, 2, 4, 4]) == True
+assert no14([2, 3, 4, 1]) == False
+assert no14([2, 1, 1]) == True
+assert no14([1, 4]) == False
+assert no14([2]) == True
+assert no14([2, 1]) == True
+assert no14([1]) == True
+assert no14([4]) == True
+assert no14([]) == True
+assert no14([1, 1, 1, 1]) == True
+assert no14([9, 4, 4, 1]) == False
+assert no14([4, 2, 3, 1]) == False
+assert no14([4, 2, 3, 5]) == True
+assert no14([4, 4, 2]) == True
+assert no14([1, 4, 4]) == False
+
+
+""" isEverywhere
+    We'll say that a value is "everywhere" in an array if for every pair of adjacent elements in the array, at least
+    one of the pair is that value. Return true if the given value is everywhere in the array.
+"""
+def isEverywhere(nums, val):
+    for i in range(len(nums)-1):
+        if val not in nums[i:i+2]:
+            return False
+    return True
+
+assert isEverywhere([1, 2, 1, 3], 1) == True
+assert isEverywhere([1, 2, 1, 3], 2) == False
+assert isEverywhere([1, 2, 1, 3, 4], 1) == False
+assert isEverywhere([2, 1, 2, 1], 1) == True
+assert isEverywhere([2, 1, 2, 1], 2) == True
+assert isEverywhere([2, 1, 2, 3, 1], 2) == False
+assert isEverywhere([3, 1], 3) == True
+assert isEverywhere([3, 1], 2) == False
+assert isEverywhere([3], 1) == True
+assert isEverywhere([], 1) == True
+assert isEverywhere([1, 2, 1, 2, 3, 2, 5], 2) == True
+assert isEverywhere([1, 2, 1, 1, 1, 2], 2) == False
+assert isEverywhere([2, 1, 2, 1, 1, 2], 2) == False
+assert isEverywhere([2, 1, 2, 2, 2, 1, 1, 2], 2) == False
+assert isEverywhere([2, 1, 2, 2, 2, 1, 2, 1], 2) == True
+assert isEverywhere([2, 1, 2, 1, 2], 2) == True
+
+
+""" either24
+    Given an array of ints, return true if the array contains a 2 next to a 2 or a 4 next to a 4, but not both.
+"""
+def either24(nums):
+    double2 = False
+    double4 = False
+    for i in range(len(nums)-1):
+        if nums[i] == 2 and nums[i+1] == 2:
+            double2 = True
+        elif nums[i] == 4 and nums[i+1] == 4:
+            double4 = True
+    return double2 ^ double4
+
+assert either24([1, 2, 2]) == True
+assert either24([4, 4, 1]) == True
+assert either24([4, 4, 1, 2, 2]) == False
+assert either24([1, 2, 3, 4]) == False
+assert either24([3, 5, 9]) == False
+assert either24([1, 2, 3, 4, 4]) == True
+assert either24([2, 2, 3, 4]) == True
+assert either24([1, 2, 3, 2, 2, 4]) == True
+assert either24([1, 2, 3, 2, 2, 4, 4]) == False
+assert either24([1, 2]) == False
+assert either24([2, 2]) == True
+assert either24([4, 4]) == True
+assert either24([2]) == False
+assert either24([]) == False
+
+
+""" matchUp
+    Given arrays nums1 and nums2 of the same length, for every element in nums1, consider the corresponding element
+    in nums2 (at the same index). Return the count of the number of times that the two elements differ by 2 or less,
+    but are not equal.
+"""
+def matchUp(nums1, nums2):
+    count = 0
+    for i in range(len(nums1)):
+        if 0 < abs(nums1[i] - nums2[i]) <= 2:
+            count += 1
+    return count
+
+assert matchUp([1, 2, 3], [2, 3, 10]) == 2
+assert matchUp([1, 2, 3], [2, 3, 5]) == 3
+assert matchUp([1, 2, 3], [2, 3, 3]) == 2
+assert matchUp([5, 3], [5, 5]) == 1
+assert matchUp([5, 3], [4, 4]) == 2
+assert matchUp([5, 3], [3, 3]) == 1
+assert matchUp([5, 3], [2, 2]) == 1
+assert matchUp([5, 3], [1, 1]) == 1
+assert matchUp([5, 3], [0, 0]) == 0
+assert matchUp([4], [4]) == 0
+assert matchUp([4], [5]) == 1
+
+
+""" has77
+    Given an array of ints, return true if the array contains two 7's next to each other, or there are two 7's
+    separated by one element, such as with {7, 1, 7}.
+"""
+def has77(nums):
+    for i in range(len(nums)-2):
+        if nums[i] == 7 and (nums[i+1] == 7 or nums[i+2] == 7):
+            return True
+    return nums[-2:] == [7, 7]
+
+assert has77([1, 7, 7]) == True
+assert has77([1, 7, 1, 7]) == True
+assert has77([1, 7, 1, 1, 7]) == False
+assert has77([7, 7, 1, 1, 7]) == True
+assert has77([2, 7, 2, 2, 7, 2]) == False
+assert has77([2, 7, 2, 2, 7, 7]) == True
+assert has77([7, 2, 7, 2, 2, 7]) == True
+assert has77([7, 2, 6, 2, 2, 7]) == False
+assert has77([7, 7, 7]) == True
+assert has77([7, 1, 7]) == True
+assert has77([7, 1, 1]) == False
+assert has77([1, 2]) == False
+assert has77([1, 7]) == False
+assert has77([7]) == False
+
+
+""" has12
+    Given an array of ints, return true if there is a 1 in the array with a 2 somewhere later in the array.
+"""
+def has12(nums):
+    seen1 = False
+    for i in range(len(nums)):
+        if nums[i] == 1:
+            seen1 = True
+        elif nums[i] == 2 and seen1:
+            return True
+    return False
+
+assert has12([1, 3, 2]) == True
+assert has12([3, 1, 2]) == True
+assert has12([3, 1, 4, 5, 2]) == True
+assert has12([3, 1, 4, 5, 6]) == False
+assert has12([3, 1, 4, 1, 6, 2]) == True
+assert has12([2, 1, 4, 1, 6, 2]) == True
+assert has12([2, 1, 4, 1, 6]) == False
+assert has12([1]) == False
+assert has12([2, 1, 3]) == False
+assert has12([2, 1, 3, 2]) == True
+assert has12([2]) == False
+assert has12([3, 2]) == False
+assert has12([3, 1, 3, 2]) == True
+assert has12([3, 5, 9]) == False
+assert has12([3, 5, 1]) == False
+assert has12([3, 2, 1]) == False
+assert has12([1, 2]) == True
+
+
+""" modThree
+    Given an array of ints, return true if the array contains either 3 even or 3 odd values all next to each other.
+"""
+def modThree(nums):
+    if len(nums) < 3:
+        return False
+    else:
+        for i in range(len(nums)-2):
+            if nums[i] % 2 == nums[i+1] % 2 == nums[i+2] % 2:
+                return True
+        return False
+
+assert modThree([2, 1, 3, 5]) == True
+assert modThree([2, 1, 2, 5]) == False
+assert modThree([2, 4, 2, 5]) == True
+assert modThree([1, 2, 1, 2, 1]) == False
+assert modThree([9, 9, 9]) == True
+assert modThree([1, 2, 1]) == False
+assert modThree([1, 2]) == False
+assert modThree([1]) == False
+assert modThree([]) == False
+assert modThree([9, 7, 2, 9]) == False
+assert modThree([9, 7, 2, 9, 2, 2]) == False
+assert modThree([9, 7, 2, 9, 2, 2, 6]) == True
+
+
+""" haveThree
+    Given an array of ints, return true if the value 3 appears in the array exactly 3 times, and no 3's are next to
+    each other.
+"""
+def haveThree(nums):
+    if len(nums) < 3:
+        return False
+    else:
+        count3 = 0
+        for i in range(len(nums)):
+            if nums[i] == 3 and i+1 < len(nums) and nums[i+1] == 3:
+                return False
+            elif nums[i] == 3:
+                count3 += 1
+        return count3 == 3
+
+assert haveThree([3, 1, 3, 1, 3]) == True
+assert haveThree([3, 1, 3, 3]) == False
+assert haveThree([3, 4, 3, 3, 4]) == False
+assert haveThree([1, 3, 1, 3, 1, 2]) == False
+assert haveThree([1, 3, 1, 3, 1, 3]) == True
+assert haveThree([1, 3, 3, 1, 3]) == False
+assert haveThree([1, 3, 1, 3, 1, 3, 4, 3]) == False
+assert haveThree([3, 4, 3, 4, 3, 4, 4]) == True
+assert haveThree([3, 3, 3]) == False
+assert haveThree([1, 3]) == False
+assert haveThree([3]) == False
+assert haveThree([1]) == False
+
+
+""" twoTwo
+    Given an array of ints, return true if every 2 that appears in the array is next to another 2.
+"""
+def twoTwo(nums):
+    for i in range(len(nums)):
+        if nums[i] == 2:
+            if i-1 >= 0 and nums[i-1] == 2 or i+1 < len(nums) and nums[i+1] == 2:
+                continue
+            else:
+                return False
+    return True
+
+assert twoTwo([4, 2, 2, 3]) == True
+assert twoTwo([2, 2, 4]) == True
+assert twoTwo([2, 2, 4, 2]) == False
+assert twoTwo([1, 3, 4]) == True
+assert twoTwo([1, 2, 2, 3, 4]) == True
+assert twoTwo([1, 2, 3, 4]) == False
+assert twoTwo([2, 2]) == True
+assert twoTwo([2, 2, 7]) == True
+assert twoTwo([2, 2, 7, 2, 1]) == False
+assert twoTwo([4, 2, 2, 2]) == True
+assert twoTwo([2, 2, 2]) == True
+assert twoTwo([1, 2]) == False
+assert twoTwo([2]) == False
+assert twoTwo([1]) == True
+assert twoTwo([]) == True
+assert twoTwo([5, 2, 2, 3]) == True
+assert twoTwo([2, 2, 5, 2]) == False
+
+
+""" sameEnds
+    Return true if the group of N numbers at the start and end of the array are the same. For example, with {5, 6,
+    45, 99, 13, 5, 6}, the ends are the same for n=0 and n=2, and false for n=1 and n=3. You may assume that n is in
+    the range 0..nums.length inclusive.
+"""
+def sameEnds(nums, len):
+    return len == 0 or nums[:len] == nums[-len:]
+
+assert sameEnds([5, 6, 45, 99, 13, 5, 6], 1) == False
+assert sameEnds([5, 6, 45, 99, 13, 5, 6], 2) == True
+assert sameEnds([5, 6, 45, 99, 13, 5, 6], 3) == False
+assert sameEnds([1, 2, 5, 2, 1], 1) == True
+assert sameEnds([1, 2, 5, 2, 1], 2) == False
+assert sameEnds([1, 2, 5, 2, 1], 0) == True
+assert sameEnds([1, 2, 5, 2, 1], 5) == True
+assert sameEnds([1, 1, 1], 0) == True
+assert sameEnds([1, 1, 1], 1) == True
+assert sameEnds([1, 1, 1], 2) == True
+assert sameEnds([1, 1, 1], 3) == True
+assert sameEnds([1], 1) == True
+assert sameEnds([], 0) == True
+assert sameEnds([4, 2, 4, 5], 1) == False
+
+
+""" tripleUp
+    Return true if the array contains, somewhere, three increasing adjacent numbers like .... 4, 5, 6, ... or 23, 24,
+    25.
+"""
+def tripleUp(nums):
+    for i in range(len(nums)-2):
+        if nums[i+2] - nums[i+1] == 1 and nums[i+1] - nums[i] == 1:
+            return True
+    return False
+
+assert tripleUp([1, 4, 5, 6, 2]) == True
+assert tripleUp([1, 2, 3]) == True
+assert tripleUp([1, 2, 4]) == False
+assert tripleUp([1, 2, 4, 5, 7, 6, 5, 6, 7, 6]) == True
+assert tripleUp([1, 2, 4, 5, 7, 6, 5, 7, 7, 6]) == False
+assert tripleUp([1, 2]) == False
+assert tripleUp([1]) == False
+assert tripleUp([]) == False
+assert tripleUp([10, 9, 8, -100, -99, -98, 100]) == True
+assert tripleUp([10, 9, 8, -100, -99, 99, 100]) == False
+assert tripleUp([-100, -99, -99, 100, 101, 102]) == True
+assert tripleUp([2, 3, 5, 6, 8, 9, 2, 3]) == False
+
+
+""" fizzArray3
+    Given start and end numbers, return a new array containing the sequence of integers from start up to but not
+    including end, so start=5 and end=10 yields {5, 6, 7, 8, 9}. The end number will be greater or equal to the start
+    number.
+"""
+def fizzArray3(start, end):
+    res = []
+    for i in range(start, end):
+        res.append(i)
+    return res
+
+assert fizzArray3(5, 10) == [5, 6, 7, 8, 9]
+assert fizzArray3(11, 18) == [11, 12, 13, 14, 15, 16, 17]
+assert fizzArray3(1, 3) == [1, 2]
+assert fizzArray3(1, 2) == [1]
+assert fizzArray3(1, 1) == []
+assert fizzArray3(1000, 1005) == [1000, 1001, 1002, 1003, 1004]
+
+
+""" shiftLeft
+    Return an array that is "left shifted" by one -- so {6, 2, 5, 3} returns {2, 5, 3, 6}. You may modify and return
+    the given array, or return a new array.
+"""
+def shiftLeft(nums):
+    if len(nums) < 2:
+        return nums
+    else:
+        temp = nums[0]
+        for i in range(len(nums)-1):
+            nums[i] = nums[i+1]
+        nums[-1] = temp
+        return nums
+
+
+assert shiftLeft([6, 2, 5, 3]) == [2, 5, 3, 6]
+assert shiftLeft([1, 2]) == [2, 1]
+assert shiftLeft([1]) == [1]
+assert shiftLeft([]) == []
+assert shiftLeft([1, 1, 2, 2, 4]) == [1, 2, 2, 4, 1]
+assert shiftLeft([1, 1, 1]) == [1, 1, 1]
+assert shiftLeft([1, 2, 3]) == [2, 3, 1]
+
+
+""" tenRun
+    For each multiple of 10 in the given array, change all the values following it to be that multiple of 10, until
+    encountering another multiple of 10. So {2, 10, 3, 4, 20, 5} yields {2, 10, 10, 10, 20, 20}.
+"""
+def tenRun(nums):
+    tenMult = -1
+    for i in range(len(nums)):
+        if nums[i] % 10 == 0:
+            tenMult = nums[i]
+        elif tenMult != -1:
+            nums[i] = tenMult
+        else:
+            continue
+    return nums
+
+assert tenRun([2, 10, 3, 4, 20, 5]) == [2, 10, 10, 10, 20, 20]
+assert tenRun([10, 1, 20, 2]) == [10, 10, 20, 20]
+assert tenRun([10, 1, 9, 20]) == [10, 10, 10, 20]
+assert tenRun([1, 2, 50, 1]) == [1, 2, 50, 50]
+assert tenRun([1, 20, 50, 1]) == [1, 20, 50, 50]
+assert tenRun([10, 10]) == [10, 10]
+assert tenRun([10, 2]) == [10, 10]
+assert tenRun([0, 2]) == [0, 0]
+assert tenRun([1, 2]) == [1, 2]
+assert tenRun([1]) == [1]
+assert tenRun([]) == []
+
+
+""" pre4
+    Given a non-empty array of ints, return a new array containing the elements from the original array that come
+    before the first 4 in the original array. The original array will contain at least one 4.
+"""
+def pre4(nums):
+    res = []
+    for i in range(len(nums)):
+        if nums[i] == 4:
+            return res
+        else:
+            res.append(nums[i])
+    return res
+
+assert pre4([1, 2, 4, 1]) == [1, 2]
+assert pre4([3, 1, 4]) == [3, 1]
+assert pre4([1, 4, 4]) == [1]
+assert pre4([1, 4, 4, 2]) == [1]
+assert pre4([1, 3, 4, 2, 4]) == [1, 3]
+assert pre4([4, 4]) == []
+assert pre4([3, 3, 4]) == [3, 3]
+assert pre4([1, 2, 1, 4]) == [1, 2, 1]
+assert pre4([2, 1, 4, 2]) == [2, 1]
+assert pre4([2, 1, 2, 1, 4, 2]) == [2, 1, 2, 1]
+
+
+""" post4
+    Given a non-empty array of ints, return a new array containing the elements from the original array that come
+    after the last 4 in the original array. The original array will contain at least one 4.
+"""
+def post4(nums):
+    i = len(nums)-1
+    while i >= 0:
+        if nums[i] == 4:
+            return nums[i+1:]
+        i -= 1
+    return
+
+assert post4([2, 4, 1, 2]) == [1, 2]
+assert post4([4, 1, 4, 2]) == [2]
+assert post4([4, 4, 1, 2, 3]) == [1, 2, 3]
+assert post4([4, 2]) == [2]
+assert post4([4, 4, 3]) == [3]
+assert post4([4, 4]) == []
+assert post4([4]) == []
+assert post4([2, 4, 1, 4, 3, 2]) == [3, 2]
+assert post4([4, 1, 4, 2, 2, 2]) == [2, 2, 2]
+assert post4([3, 4, 3, 2]) == [3, 2]
+
+
+""" notAlone
+    We'll say that an element in an array is "alone" if there are values before and after it, and those values are
+    different from it. Return a version of the given array where every instance of the given value which is alone is
+    replaced by whichever value to its left or right is larger.
+"""
+def notAlone(nums, val):
+    if not nums:
+        return nums
+    else:
+        for i in range(1, len(nums)-1):
+            if nums[i] == val and nums[i-1] != val and nums[i+1] != val:
+                nums[i] = max(nums[i-1], nums[i+1])
+        return nums
+
+assert notAlone([1, 2, 3], 2) == [1, 3, 3]
+assert notAlone([1, 2, 3, 2, 5, 2], 2) == [1, 3, 3, 5, 5, 2]
+assert notAlone([3, 4], 3) == [3, 4]
+assert notAlone([3, 3], 3) == [3, 3]
+assert notAlone([1, 3, 1, 2], 1) == [1, 3, 3, 2]
+assert notAlone([3], 3) == [3]
+assert notAlone([], 3) == []
+assert notAlone([7, 1, 6], 1) == [7, 7, 6]
+assert notAlone([1, 1, 1], 1) == [1, 1, 1]
+assert notAlone([1, 1, 1, 2], 1) == [1, 1, 1, 2]
+
+
+""" zeroFront
+    Return an array that contains the exact same numbers as the given array, but rearranged so that all the zeros are
+    grouped at the start of the array. The order of the non-zero numbers does not matter. So {1, 0, 0, 1} becomes {0,
+    0, 1, 1}. You may modify and return the given array or make a new array.
+"""
+def zeroFront(nums):
+    i = len(nums) - 1
+    rightZero = i
+    while i >= 0:
+        while nums[rightZero] != 0 and rightZero >= 0:
+            rightZero -= 1
+        if nums[i] != 0 and i < rightZero:
+            nums[rightZero] = nums[i]
+            nums[i] = 0
+        i -= 1
+    return nums
+
+assert zeroFront([1, 0, 0, 1]) == [0, 0, 1, 1]
+assert zeroFront([0, 1, 1, 0, 1]) == [0, 0, 1, 1, 1]
+assert zeroFront([1, 0]) == [0, 1]
+assert zeroFront([0, 1]) == [0, 1]
+assert zeroFront([1, 1, 1, 0]) == [0, 1, 1, 1]
+assert zeroFront([2, 2, 2, 2]) == [2, 2, 2, 2]
+assert zeroFront([0, 0, 1, 0]) == [0, 0, 0, 1]
+assert zeroFront([-1, 0, 0, -1, 0]) == [0, 0, 0, -1, -1]
+assert zeroFront([0, -3, 0, -3]) == [0, 0, -3, -3]
+assert zeroFront([]) == []
+assert zeroFront([9, 9, 0, 9, 0, 9]) == [0, 0, 9, 9, 9, 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
