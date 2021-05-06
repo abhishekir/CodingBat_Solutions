@@ -805,8 +805,11 @@ def zeroFront(nums):
     i = len(nums) - 1
     rightZero = i
     while i >= 0:
-        while nums[rightZero] != 0 and rightZero >= 0:
-            rightZero -= 1
+        while nums[rightZero] != 0:
+            if rightZero == 0:
+                break
+            else:
+                rightZero -= 1
         if nums[i] != 0 and i < rightZero:
             nums[rightZero] = nums[i]
             nums[i] = 0
